@@ -1512,6 +1512,8 @@ def processWayBackPage(url):
                 # Choose a random user agent string to use for any requests
                 userAgent = random.choice(USER_AGENT)
                 page = url.split('page=')[1]
+                time.sleep(1)
+                writerr(colored(getSPACER("Getting wayback page " + page), "white"))
                 session = requests.Session()
                 session.mount('https://', HTTP_ADAPTER)
                 session.mount('http://', HTTP_ADAPTER)
