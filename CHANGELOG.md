@@ -1,5 +1,47 @@
 ## Changelog
 
+- v2.4
+
+  - New
+
+    - Add lots of extra search terms to the `DEFAULT_FILTER_KEYWORDS` and `FILTER_KEYWORDS` in `config.yml`
+
+  - Changed
+
+    - The Common Crawl HTTPAdaptor for retry strategy will just be applied for code 503. There was an issue with 504 errors happening, and then waymore effectively freezes because of the retry strategy. The Common Crawl documentation (https://commoncrawl.org/blog/oct-nov-2023-performance-issues) just says to retry on 503.
+
+- v2.3
+
+  - New
+
+    - Add `jira` as a search term to the `DEFAULT_FILTER_KEYWORDS` and `FILTER_KEYWORDS` in `config.yml`
+
+- v2.2
+
+  - New
+
+    - Add `-lcy` argument. This lets you limit the number of Common Crawl index collections searched by the year of the index data. The earliest index has data from 2008. Setting to 0 (default) will search collections or any year (but in conjuction with `-lcc`). For example, if you are only interested in data from 2015 and after, pass `-lcy 2015`. This will override the value of `-lcc` if passed.
+
+- v2.1
+
+  - New
+
+    - When the responses are downloaded from archive.org they include some archive.orf code such as scripts and stylesheets. This is usually removed but they may have changed this so was being included again. This change will ensure the new code is removed so the response doesn't include the archive.org code.
+
+- v2.0
+
+  - New
+
+    - Add VirusTotal as a source for URLs. We will get URLs from the v2 API domain report. This can include sub domains, detected URLs, and undetected URLs in the response. It does not give you the status code or MIME type of the links, so we will just check against extension.
+    - Show a specific message for Wayback Machine if there is a Connection Refused error. This happens when they have blocked the users IP.
+    - Add some pointless celebration messages to the banner for a few different dates!
+
+- v1.37
+
+  - New
+
+    - Add argument `-co`/`--check-only`. If passed, then it will just get the count of requests that need to be made to get URLs from the sources, and how many archived responses will be downloaded. It will try to give an idea of the time the tool could take with the settings given.
+
 - v1.36
 
   - New
