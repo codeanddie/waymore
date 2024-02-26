@@ -1717,7 +1717,7 @@ def getWaybackUrls():
             session = requests.Session()
             session.mount('https://', HTTP_ADAPTER)
             session.mount('http://', HTTP_ADAPTER)
-            resp = session.get(url+'&showNumPages=True', headers={"User-Agent":userAgent}) 
+            resp = session.get(url+'&showNumPages=True', headers={"User-Agent":userAgent}, verify=False) 
             totalPages = int(resp.text.strip())
             
             # If the argument to limit the requests was passed and the total pages is larger than that, set to the limit
@@ -2320,7 +2320,7 @@ def processResponses():
                 session = requests.Session()
                 session.mount('https://', HTTP_ADAPTER)
                 session.mount('http://', HTTP_ADAPTER)
-                resp = session.get(url, stream=True, headers={"User-Agent":userAgent}, timeout=args.timeout)  
+                resp = session.get(url, stream=True, headers={"User-Agent":userAgent}, timeout=args.timeout, verify=False)  
             except ConnectionError as ce:
                 writerr(colored(getSPACER('[ ERR ] Wayback Machine (archive.org) connection error'), 'red'))
                 resp = None
